@@ -1,0 +1,911 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm9="http://schemas.microsoft.com/dsltools/UseCaseModel" xmlns:dm10="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner"
+  dslVersion="1.0.0.0"
+  Id="47f12f07-4274-4b16-96a9-0a6436c8d223"
+  name="ModelingProject1" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <ownedCommentsInternal>
+    <comment
+      Id="e522da8f-c6f4-48ea-9951-04ce5471279e">
+      <body>1. Обменивается иображеними с модальностями ЛПУ по протоколу DICOM.
+2. Извещает MegaPACS о изменениях в составе исследований.
+
+3. Обменивается исследованиями с MegaPACS по протоколу bittorren.
+4. Хранит данные в DB MySql</body>
+    </comment>
+    <comment
+      Id="43a4b44e-e885-4af0-a940-2a093448fd15">
+      <body>1. Регистрирует изменения в PACS ЛПУ.
+2. Получает изображения из PACS ЛПУ.
+3. Передает изображения в PACS ЛПУ по запросу.</body>
+    </comment>
+    <comment
+      Id="cad008bf-5c97-44d3-928e-974f222a80dc">
+      <body>1. Настраивает конфигурацию системы.
+2. Получает отчеты о состоянии, статистике обменов.</body>
+    </comment>
+    <comment
+      Id="f6835375-6305-4f0e-b66f-637b8d7d5a1b">
+      <body>Хранит обновляемые копии всех снимков PACS ЛПУ.</body>
+      <annotatedElements>
+        <componentMoniker
+          Id="e7657b7d-a320-46de-9b74-3e3ba883c412"
+          LastKnownName="MegaPACS (1)"
+          LastKnownLocation="ModelingProject1.uml" />
+      </annotatedElements>
+    </comment>
+    <comment
+      Id="e1216330-a33d-4aab-a2f9-f68358fccc72">
+      <body>1. Автоматически забирает снимки из Мега PACS (по PatientID) от др. ЛПУ по DICOM Query от Просмотровой станции ЛПУ.
+2. Извещает MegaPacs (JSON) об изменении своего содержимого.</body>
+      <annotatedElements>
+        <partMoniker
+          Id="8878167b-1850-46b5-9d64-bb1839380d96"
+          LastKnownName="PACS (2)"
+          LastKnownLocation="ModelingProject1.uml" />
+      </annotatedElements>
+    </comment>
+  </ownedCommentsInternal>
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
+      <profileInstance
+        Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791"
+        name="StandardProfileL2" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="29349502-908c-4fda-9054-c48619c59ed0">
+      <profileInstance
+        Id="532ea607-fb19-44b8-8502-3351b05452be"
+        name="StandardProfileL3" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <subsystem
+        Id="6580aa48-dbc1-486e-a35b-b208f9753c2f"
+        name="Java PACS @ ЛПУ 1, ОС: UBUNTU"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="23efff20-bfac-4a6d-a1e2-03f8c465e4b4"
+            isDerived="false"
+            sourceEndRoleName="ЛПУ 1"
+            targetEndRoleName="MegaPACS"
+            isLeaf="false"
+            name="BitTorrent протокол"
+            isAbstract="false">
+            <subsystemMoniker
+              Id="19db6f80-4322-497d-8e62-e71d5cd42ba7"
+              LastKnownName="MegaPACS, ОС: UBUNTU(?)"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="574b65ba-1767-4611-920b-37c7b0b7489b"
+                  name="ЛПУ 1"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="41d5d2ad-14e8-4fd8-a15f-3d5e2f7365cc"
+                  name="MegaPACS"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </subsystem>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <subsystem
+        Id="19db6f80-4322-497d-8e62-e71d5cd42ba7"
+        name="MegaPACS, ОС: UBUNTU(?)"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="68ac69a9-5b6a-4b7f-82cd-7f3b68cc48d2"
+            isDerived="false"
+            sourceEndRoleName="MegaPACS"
+            targetEndRoleName="ЛПУ 1"
+            isLeaf="false"
+            isAbstract="false">
+            <subsystemMoniker
+              Id="6580aa48-dbc1-486e-a35b-b208f9753c2f"
+              LastKnownName="Java PACS @ ЛПУ 1, ОС: UBUNTU"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="92b02675-3f54-40a9-8b8d-fca8ef618c91"
+                  name="MegaPACS"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="85e0b674-bc68-4755-bf3f-48fba8a05884"
+                  name="ЛПУ 1"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="c0098696-68cc-4438-baa3-00133521c28f"
+            isDerived="false"
+            sourceEndRoleName="MegaPACS"
+            targetEndRoleName="ЛПУ N"
+            isLeaf="false"
+            isAbstract="false">
+            <subsystemMoniker
+              Id="fb095777-852f-4ede-9532-1e049566af83"
+              LastKnownName="PACS ЛПУ N"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="dde5246a-c292-46d9-bfc6-51645fa2af2e"
+                  name="MegaPACS"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="fbd665ed-b9c3-4de6-97d5-eb2fac4122bc"
+                  name="ЛПУ N"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="520b973b-e644-42e5-9746-2af326dd99ab"
+            isDerived="false"
+            sourceEndRoleName="MegaPACS"
+            targetEndRoleName="Администратор MegaPACS"
+            isLeaf="false"
+            isAbstract="false">
+            <actorMoniker
+              Id="030ee67e-953b-472c-8de8-792120613af1"
+              LastKnownName="Администратор MegaPACS"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="62f9e467-3990-4924-911a-45db470a1226"
+                  name="MegaPACS"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="585f649f-1fc4-4e4c-a11b-fce5fb0dc307"
+                  name="Администратор MegaPACS"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </subsystem>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <subsystem
+        Id="fb095777-852f-4ede-9532-1e049566af83"
+        name="PACS ЛПУ N"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="3b63d09a-168c-4275-9825-8fdd2a8dbc54"
+            isDerived="false"
+            sourceEndRoleName="ЛПУ N"
+            targetEndRoleName="MegaPACS"
+            isLeaf="false"
+            isAbstract="false">
+            <subsystemMoniker
+              Id="19db6f80-4322-497d-8e62-e71d5cd42ba7"
+              LastKnownName="MegaPACS, ОС: UBUNTU(?)"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="fe633e78-aa23-45c1-9f87-3b0e001fe23a"
+                  name="ЛПУ N"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c429303b-c41b-49a1-a340-df0cda3ac3a3"
+                  name="MegaPACS"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </subsystem>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="030ee67e-953b-472c-8de8-792120613af1"
+        name="Администратор MegaPACS"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="5faa30c4-6c1d-4fe9-97ee-4fb16ea34830"
+            isDerived="false"
+            sourceEndRoleName="Администратор MegaPACS"
+            targetEndRoleName="MegaPACS"
+            isLeaf="false"
+            isAbstract="false">
+            <subsystemMoniker
+              Id="19db6f80-4322-497d-8e62-e71d5cd42ba7"
+              LastKnownName="MegaPACS, ОС: UBUNTU(?)"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="e710cd63-3ded-4239-ae8e-a85c3171a4cc"
+                  name="Администратор MegaPACS"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="430e3da9-457c-4158-86d4-93031913386a"
+                  name="MegaPACS"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <artifact
+        Id="f7de7dcb-1bdb-4700-a548-5ce3e10818c2"
+        name="Artifact1"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="32c1f82e-f7b6-4dc6-8c3d-d071f0b62878"
+        name="UseCase1"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="714df7d0-df50-4e46-b11e-ff79349eec15"
+        name="LAN ЛПУ"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <part
+            Id="8878167b-1850-46b5-9d64-bb1839380d96"
+            name="PACS (2)"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="Composite"
+            isComposite="true">
+            <targetNamedElementsInternal>
+              <connector
+                Id="bc0b63f7-2376-4390-b86f-241d6de7c242"
+                isLeaf="false"
+                isStatic="false">
+                <requiredInterfaceMoniker
+                  Id="ad013aab-114a-40ee-80be-e907dfa9483e"
+                  LastKnownName="Port1"
+                  LastKnownLocation="ModelingProject1.uml" />
+                <relationshipOwnedElementsInternal>
+                  <connectorHasConnectorEnds>
+                    <connectorEnd
+                      Id="232f22bb-be32-4535-865a-0b910a2dc739">
+                      <portWithPart>
+                        <requiredInterfaceMoniker
+                          Id="42ba1ef2-ce89-40e4-840f-96ea766ade70"
+                          LastKnownName="Port3"
+                          LastKnownLocation="ModelingProject1.uml" />
+                      </portWithPart>
+                    </connectorEnd>
+                  </connectorHasConnectorEnds>
+                  <connectorHasConnectorEnds>
+                    <connectorEnd
+                      Id="e5fe1459-3cd2-4c4b-8bbe-cafbcb436e09" />
+                  </connectorHasConnectorEnds>
+                </relationshipOwnedElementsInternal>
+              </connector>
+              <connector
+                Id="d4d9f06f-7058-4a7d-be93-b3c426855d19"
+                isLeaf="false"
+                isStatic="false">
+                <requiredInterfaceMoniker
+                  Id="8e929684-2cff-48c2-92a8-8f5d13b57a91"
+                  LastKnownName="Port2"
+                  LastKnownLocation="ModelingProject1.uml" />
+                <relationshipOwnedElementsInternal>
+                  <connectorHasConnectorEnds>
+                    <connectorEnd
+                      Id="7175cc9e-e092-4c92-87ea-e8bbeda9eda3">
+                      <portWithPart>
+                        <requiredInterfaceMoniker
+                          Id="a84a465f-9158-4320-a91b-c160e4047c3f"
+                          LastKnownName="Port4"
+                          LastKnownLocation="ModelingProject1.uml" />
+                      </portWithPart>
+                    </connectorEnd>
+                  </connectorHasConnectorEnds>
+                  <connectorHasConnectorEnds>
+                    <connectorEnd
+                      Id="86cd47c4-3130-42cb-beea-e069556a77f9" />
+                  </connectorHasConnectorEnds>
+                </relationshipOwnedElementsInternal>
+              </connector>
+            </targetNamedElementsInternal>
+            <type_NamedElement>
+              <componentMoniker
+                Id="8e75f235-11a1-44bc-ba3d-869a9d03a02a"
+                LastKnownName="HospitalPacsHost"
+                LastKnownLocation="ModelingProject1.uml" />
+            </type_NamedElement>
+          </part>
+          <part
+            Id="52429b60-3acc-48d8-8ccf-37d66e40890b"
+            name="Мед. прибор"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="Composite"
+            isComposite="true">
+            <targetNamedElementsInternal>
+              <connector
+                Id="d4e03c68-953a-4a4c-b883-1082a6480d8c"
+                isLeaf="false"
+                isStatic="false">
+                <partMoniker
+                  Id="8878167b-1850-46b5-9d64-bb1839380d96"
+                  LastKnownName="PACS (2)"
+                  LastKnownLocation="ModelingProject1.uml" />
+                <relationshipOwnedElementsInternal>
+                  <connectorHasConnectorEnds>
+                    <connectorEnd
+                      Id="50ee6ac7-4f14-49b5-9ae0-a4d2216f8470">
+                      <portWithPart>
+                        <requiredInterfaceMoniker
+                          Id="d6943650-5dd6-4e7c-a346-8c71458001a4"
+                          LastKnownName="Port1"
+                          LastKnownLocation="ModelingProject1.uml" />
+                      </portWithPart>
+                    </connectorEnd>
+                  </connectorHasConnectorEnds>
+                  <connectorHasConnectorEnds>
+                    <connectorEnd
+                      Id="ac96ae49-98ed-423c-9a30-845d9fa85ad9">
+                      <portWithPart>
+                        <providedInterfaceMoniker
+                          Id="65919922-2548-4158-acef-c52f15072979"
+                          LastKnownName="Port1"
+                          LastKnownLocation="ModelingProject1.uml" />
+                      </portWithPart>
+                    </connectorEnd>
+                  </connectorHasConnectorEnds>
+                </relationshipOwnedElementsInternal>
+              </connector>
+            </targetNamedElementsInternal>
+            <type_NamedElement>
+              <componentMoniker
+                Id="a30ffe5a-b69f-4c70-91eb-e0edfa8ac2d2"
+                LastKnownName="Component2"
+                LastKnownLocation="ModelingProject1.uml" />
+            </type_NamedElement>
+          </part>
+          <part
+            Id="c41e6032-601c-425b-a072-29465fd9d35d"
+            name="Просмотровая станция"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="Composite"
+            isComposite="true">
+            <targetNamedElementsInternal>
+              <connector
+                Id="803e98b7-d52c-44b5-871f-46049424ccc5"
+                isLeaf="false"
+                isStatic="false">
+                <partMoniker
+                  Id="8878167b-1850-46b5-9d64-bb1839380d96"
+                  LastKnownName="PACS (2)"
+                  LastKnownLocation="ModelingProject1.uml" />
+                <relationshipOwnedElementsInternal>
+                  <connectorHasConnectorEnds>
+                    <connectorEnd
+                      Id="521f0756-2128-4c52-b046-924a80b3f721">
+                      <portWithPart>
+                        <requiredInterfaceMoniker
+                          Id="d7d61bf7-c4e0-4add-aa5c-1cee2d262e0d"
+                          LastKnownName="Port1"
+                          LastKnownLocation="ModelingProject1.uml" />
+                      </portWithPart>
+                    </connectorEnd>
+                  </connectorHasConnectorEnds>
+                  <connectorHasConnectorEnds>
+                    <connectorEnd
+                      Id="e8f007be-754f-4178-930b-ce3470cf8fba">
+                      <portWithPart>
+                        <providedInterfaceMoniker
+                          Id="12ca9f70-80f2-4ba5-9b1d-15360a68d4ef"
+                          LastKnownName="Port2"
+                          LastKnownLocation="ModelingProject1.uml" />
+                      </portWithPart>
+                    </connectorEnd>
+                  </connectorHasConnectorEnds>
+                </relationshipOwnedElementsInternal>
+              </connector>
+            </targetNamedElementsInternal>
+            <type_NamedElement>
+              <componentMoniker
+                Id="868a571d-912b-49d5-9e8f-258267a0bfa7"
+                LastKnownName="Component3"
+                LastKnownLocation="ModelingProject1.uml" />
+            </type_NamedElement>
+          </part>
+          <requiredInterface
+            Id="8e929684-2cff-48c2-92a8-8f5d13b57a91"
+            name="Port2"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <suppliersInternal>
+              <dependency
+                Id="1ffca31a-c73c-4dab-b799-72e00136d83a">
+                <providedInterfaceMoniker
+                  Id="7ab899e6-389a-4c7b-8ab2-9cf0a5580eb3"
+                  LastKnownName="Port2"
+                  LastKnownLocation="ModelingProject1.uml" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="7a15823c-6ddd-4a11-a0e2-0ddf56ec3a08"
+                LastKnownLocation="ModelingProject1.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+          <requiredInterface
+            Id="ad013aab-114a-40ee-80be-e907dfa9483e"
+            name="Port1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <suppliersInternal>
+              <dependency
+                Id="0caca6e0-cd41-4a2d-ac41-b3b800d536db">
+                <providedInterfaceMoniker
+                  Id="813a1a2c-4885-434d-b3fc-a1da12507c24"
+                  LastKnownName="Port1"
+                  LastKnownLocation="ModelingProject1.uml" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="fcd35c15-7547-4c75-b0d0-0ed28bdf1b58"
+                LastKnownLocation="ModelingProject1.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="8e75f235-11a1-44bc-ba3d-869a9d03a02a"
+        name="HospitalPacsHost"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <providedInterface
+            Id="65919922-2548-4158-acef-c52f15072979"
+            name="Port1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="ea659293-5e47-45e6-b271-2a308b9623c3"
+                LastKnownName="Dicom Store SCP"
+                LastKnownLocation="ModelingProject1.uml" />
+            </type_NamedElement>
+          </providedInterface>
+          <providedInterface
+            Id="12ca9f70-80f2-4ba5-9b1d-15360a68d4ef"
+            name="Port2"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="44c2b968-44e4-4e85-bee8-5b57895fe467"
+                LastKnownName="DICOM Query/Retrieve SCP (2.3)"
+                LastKnownLocation="ModelingProject1.uml" />
+            </type_NamedElement>
+          </providedInterface>
+          <requiredInterface
+            Id="42ba1ef2-ce89-40e4-840f-96ea766ade70"
+            name="Port3"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="4bee2ef8-6980-408b-8e82-741073c15bee"
+                LastKnownName="BitTorrent клиент (2.1)"
+                LastKnownLocation="ModelingProject1.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+          <requiredInterface
+            Id="a84a465f-9158-4320-a91b-c160e4047c3f"
+            name="Port4"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="8fb402cc-9903-483d-8551-a738cb615131"
+                LastKnownName="JSON messages Http client (2.2)"
+                LastKnownLocation="ModelingProject1.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="a30ffe5a-b69f-4c70-91eb-e0edfa8ac2d2"
+        name="Component2"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <requiredInterface
+            Id="d6943650-5dd6-4e7c-a346-8c71458001a4"
+            name="Port1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="58292a06-00ec-473c-8ded-b5f3db576319"
+                LastKnownName="Dicom Store SCU"
+                LastKnownLocation="ModelingProject1.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="868a571d-912b-49d5-9e8f-258267a0bfa7"
+        name="Component3"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <requiredInterface
+            Id="d7d61bf7-c4e0-4add-aa5c-1cee2d262e0d"
+            name="Port1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="fbf7de4f-a7d0-4c32-b8d8-b5f6b4027ceb"
+                LastKnownName="Dicom Query/Retrieve SCU"
+                LastKnownLocation="ModelingProject1.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="7785d81d-b50a-41f5-9361-0713aeffd6df"
+        name="UseCase2"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="ea659293-5e47-45e6-b271-2a308b9623c3"
+        name="Dicom Store SCP"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="58292a06-00ec-473c-8ded-b5f3db576319"
+        name="Dicom Store SCU"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="e7657b7d-a320-46de-9b74-3e3ba883c412"
+        name="MegaPACS (1)"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <providedInterface
+            Id="7ab899e6-389a-4c7b-8ab2-9cf0a5580eb3"
+            name="Port2"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="22d11a3f-1d7b-4ed7-a40c-d78bd731cb1e"
+                LastKnownName="REST JSON Web Interface (1.2)"
+                LastKnownLocation="ModelingProject1.uml" />
+            </type_NamedElement>
+          </providedInterface>
+          <providedInterface
+            Id="813a1a2c-4885-434d-b3fc-a1da12507c24"
+            name="Port1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="75f5f172-c928-48be-851f-1da6835a26ee"
+                LastKnownName="BitTorrent сервер (1.1)"
+                LastKnownLocation="ModelingProject1.uml" />
+            </type_NamedElement>
+          </providedInterface>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="d6c85611-3d8e-4f11-9410-e7fc56cf3cc8"
+        name="Component4"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="44c2b968-44e4-4e85-bee8-5b57895fe467"
+        name="DICOM Query/Retrieve SCP (2.3)"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="fbf7de4f-a7d0-4c32-b8d8-b5f6b4027ceb"
+        name="Dicom Query/Retrieve SCU"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="4125b1a0-8d16-486d-b0f9-bef9c2130e65"
+        name="HospitalPacsHost"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="4bee2ef8-6980-408b-8e82-741073c15bee"
+        name="BitTorrent клиент (2.1)"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="75f5f172-c928-48be-851f-1da6835a26ee"
+        name="BitTorrent сервер (1.1)"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="fcd35c15-7547-4c75-b0d0-0ed28bdf1b58"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="22d11a3f-1d7b-4ed7-a40c-d78bd731cb1e"
+        name="REST JSON Web Interface (1.2)"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="0369a4d3-76c1-4908-b4ef-16974ae7b824"
+        name="Lan ЛПУ N"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="7a15823c-6ddd-4a11-a0e2-0ddf56ec3a08"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="8fb402cc-9903-483d-8551-a738cb615131"
+        name="JSON messages Http client (2.2)"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+  </packagedElements>
+  <primitiveType
+    Id="220a3521-e091-4221-bae9-3ef9018e845c"
+    name="Integer"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+    name="Boolean"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+    name="String"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="3ab42e7d-4969-445a-b209-471f5cb8209c"
+    name="UnlimitedNatural"
+    isAbstract="false"
+    isLeaf="false" />
+</modelStoreModel>
