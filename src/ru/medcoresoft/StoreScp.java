@@ -243,7 +243,7 @@ public class StoreScp
     }
 
     public static void main(String[] args1) {
-        String[] args=new String[]{"-b","STORESCP:1112","--accept-unknown"};
+        String[] args=new String[]{"-b","STORESCP:1112","--accept-unknown","--filepath", "{00100020}/{0020000D}/{0020000E}/{00080018}.dcm"};
         try {
             CommandLine cl = parseComandLine(args);
             StoreScp main = new StoreScp();
