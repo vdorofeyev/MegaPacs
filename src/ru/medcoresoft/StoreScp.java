@@ -40,6 +40,9 @@ package ru.medcoresoft;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.Date;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
@@ -74,6 +77,9 @@ import org.dcm4che.util.SafeClose;
 import org.dcm4che.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static ru.medcoresoft.Repository.AddStudy;
+import static ru.medcoresoft.Repository.GetConnection;
 
 /**
  * @author Gunter Zeilinger <gunterze@gmail.com>
@@ -156,7 +162,8 @@ public class StoreScp
         DicomInputStream in = new DicomInputStream(file);
         try {
             in.setIncludeBulkData(IncludeBulkData.NO);
-            return in.readDataset(-1, Tag.PixelData);
+            Attributes attributes = in.readDataset(-1, Tag.PixelData);
+            return attributes;
         } finally {
             SafeClose.close(in);
         }
@@ -243,6 +250,8 @@ public class StoreScp
     }
 
     public static void main(String[] args1) {
+        LocalDate d = LocalDate.of(2012, Month.MAY, 14);
+       AddStudy("PatId", "PatName",d,"",d);
         String[] args=new String[]{"-b","STORESCP:1112","--accept-unknown","--filepath", "{00100020}/{0020000D}/{0020000E}/{00080018}.dcm"};
         try {
             CommandLine cl = parseComandLine(args);

@@ -2,6 +2,7 @@
   <library name="lib">
     <CLASSES>
       <root url="file://$PROJECT_DIR$/../dcm4che-3.2.1/lib" />
+      <root url="jar://$PROJECT_DIR$/src/ru/medcoresoft/mysql-connector-java-5.1.29-bin.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
