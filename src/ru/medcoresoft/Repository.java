@@ -1,5 +1,8 @@
 package ru.medcoresoft;
 
+import org.dcm4che.data.Attributes;
+import org.dcm4che.data.Tag;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.Date;
@@ -8,14 +11,39 @@ import java.util.Date;
  * Created by vdorofeyev on 4/1/14.
  */
 public class Repository {
+    public static void AddFile(Attributes attributes)
+    {
+String patientId= attributes.getString(Tag.PatientID);
+String patientName= attributes.getString(Tag.PatientName);
+String patientBirthDate = attributes.getString(Tag.PatientBirthDate);
+String studyInstanceUid = attributes.getString(Tag.StudyInstanceUID);
+String studyDate = attributes.getString(Tag.StudyDate);
+        Connection conn = GetConnection();
+
+        String     sql = "INSERT INTO pacs.patient VALUES('"+patientId+"','"+
+                patientName+"', '"+patientBirthDate+"')";
+        try (Statement stmt = conn.createStatement())
+        {
+            stmt.executeUpdate(sql);
+        }
+        catch (SQLException ex) {
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+
+    }
+
+
     public static void AddStudy(String PatientId, String PatientName, LocalDate PatientBirthDate,
                                 String StudyInstanceUid, LocalDate StudyDate)
     {
-Connection conn = GetConnection();
-        String     sql = "INSERT INTO pacs.patient VALUES('"+PatientId+"','"+
+Connection conn = GetConnection(); if(conn==null) return;
+        String sql;
+        sql = "INSERT INTO pacs.patient VALUES('"+PatientId+"','"+
                 PatientName+"', '"+PatientBirthDate+"')";
-   //     sql = "INSERT INTO EMPLOYEES VALUES(1, 'John Doe')";
-        try (Statement stmt = conn.createStatement())
+          try (Statement stmt = conn.createStatement())
         {
             stmt.executeUpdate(sql);
         }
@@ -44,6 +72,7 @@ Connection conn = GetConnection();
                 System.err.println("Cause: "+sqlex.getCause());
                 sqlex = sqlex.getNextException();
             }
+            return null;
         }
 
         return conn;

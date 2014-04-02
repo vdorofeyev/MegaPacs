@@ -78,6 +78,7 @@ import org.dcm4che.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static ru.medcoresoft.Repository.AddFile;
 import static ru.medcoresoft.Repository.AddStudy;
 import static ru.medcoresoft.Repository.GetConnection;
 
@@ -110,6 +111,7 @@ public class StoreScp
             if (storageDir == null)
                 return;
 
+
             String cuid = rq.getString(Tag.AffectedSOPClassUID);
             String iuid = rq.getString(Tag.AffectedSOPInstanceUID);
             String tsuid = pc.getTransferSyntax();
@@ -117,10 +119,12 @@ public class StoreScp
             try {
                 storeTo(as, as.createFileMetaInformation(iuid, cuid, tsuid),
                         data, file);
+                Attributes attributes =parse(file);
+               AddFile(attributes);
                 renameTo(as, file, new File(storageDir,
                         filePathFormat == null
                                 ? iuid
-                                : filePathFormat.format(parse(file))));
+                                : filePathFormat.format(attributes)));
             } catch (Exception e) {
                 deleteFile(as, file);
                 throw new DicomServiceException(Status.ProcessingFailure, e);
@@ -250,8 +254,8 @@ public class StoreScp
     }
 
     public static void main(String[] args1) {
-        LocalDate d = LocalDate.of(2012, Month.MAY, 14);
-       AddStudy("PatId", "PatName",d,"",d);
+   //     LocalDate d = LocalDate.of(2012, Month.MAY, 14);
+   //    AddStudy("PatId", "PatName",d,"",d);
         String[] args=new String[]{"-b","STORESCP:1112","--accept-unknown","--filepath", "{00100020}/{0020000D}/{0020000E}/{00080018}.dcm"};
         try {
             CommandLine cl = parseComandLine(args);
