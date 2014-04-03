@@ -5,7 +5,6 @@ import org.dcm4che.data.Tag;
 
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  * Created by vdorofeyev on 4/1/14.
@@ -78,3 +77,4 @@ Connection conn = GetConnection(); if(conn==null) return;
         return conn;
     }
 }
+

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="ru.medcoresoft.StudyEntity" table="study" schema="" catalog="pacs">
+        <id name="studyInstanceUid">
+            <column name="StudyInstanceUid" sql-type="varchar" length="64" not-null="true"/>
+        </id>
+        <property name="patientId">
+            <column name="PatientId" sql-type="varchar" length="16" not-null="true"/>
+        </property>
+        <property name="studyDate">
+            <column name="StudyDate" sql-type="datetime" length="19"/>
+        </property>
+    </class>
+</hibernate-mapping>
