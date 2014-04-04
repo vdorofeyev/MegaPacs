@@ -2,16 +2,18 @@ package ru.medcoresoft;
 
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by vdorofeyev on 4/2/14.
  */
-public class HibernateDb {
+public class Main {
     private static final SessionFactory ourSessionFactory;
     private static final ServiceRegistry serviceRegistry;
 
@@ -30,8 +32,14 @@ public class HibernateDb {
     public static Session getSession() throws HibernateException {
         return ourSessionFactory.openSession();
     }
-
-    public static void main1(final String[] args) throws Exception {
+public static PatientEntity GetPatient(String patientId)
+{
+    final Session session = getSession();
+    Criteria cr = session.createCriteria(PatientEntity.class);
+    cr.add(Restrictions.idEq(patientId));
+    List results = cr.list().;
+}
+    public static void main(final String[] args) throws Exception {
         final Session session = getSession();
         try {
             System.out.println("querying all the managed entities...");
@@ -48,11 +56,5 @@ public class HibernateDb {
         } finally {
             session.close();
         }
-    }
-    public static PatientEntity GetPatient(String patientId)
-    {
-        final Session session = getSession();
-       PatientEntity patientEntity = (PatientEntity) session.get("PatientEntity",patientId);
-        return patientEntity;
     }
 }

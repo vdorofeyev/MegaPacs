@@ -12,7 +12,9 @@ import java.time.LocalDate;
 public class Repository {
     public static void AddFile(Attributes attributes)
     {
-String patientId= attributes.getString(Tag.PatientID);
+        PatientEntity pat = new PatientEntity();
+String patientId=  attributes.getString(Tag.PatientID); pat.setId(patientId);
+
 String patientName= attributes.getString(Tag.PatientName);
 String patientBirthDate = attributes.getString(Tag.PatientBirthDate);
 String studyInstanceUid = attributes.getString(Tag.StudyInstanceUID);
